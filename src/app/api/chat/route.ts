@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: body.options?.model || process.env.OPENROUTER_MODEL || 'nvidia/nemotron-3-nano-30b-a3b:free',
+      model: body.options?.model || process.env.OPENROUTER_MODEL || 'google/gemini-2.0-flash-exp:free',
       messages: body.messages,
       temperature: body.options?.temperature ?? 0.7,
     }),
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
   if (!res.ok) {
     const err = await res.text();
     console.error('OpenRouter error:', res.status, err);
-    return NextResponse.json({ error: `OpenRouter error: ${res.status}` }, { status: res.status });
+    return NextResponse.json({ error: `OpenRouter error: ${res.status}${err ? ` — ${err}` : ''}` }, { status: res.status });
   }
 
   const data = await res.json();
