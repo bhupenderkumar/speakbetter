@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: body.options?.model || process.env.OPENROUTER_MODEL || 'meta-llama/llama-3.2-3b-instruct:free',
+      model: body.options?.model || process.env.OPENROUTER_MODEL || 'openai/gpt-4o-mini',
       messages: body.messages,
       temperature: body.options?.temperature ?? 0.7,
     }),
